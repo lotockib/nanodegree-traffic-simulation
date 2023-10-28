@@ -1,0 +1,19 @@
+{
+    "C_Cpp.default.compilerPath": "/usr/bin/g++",
+    "files.associations": {
+        "*.aliases": "shellscript",
+        "*.bashrc": "shellscript",
+        "*.c": "c",
+        "*.config": "shellscript",
+        "*.h": "c",
+        "*.launch": "xml",
+        "*.msg": "shellscript",
+        "*.rviz": "xml",
+        "*.sdf": "xml",
+        "*.srv": "shellscript",
+        "*.urdf": "xml",
+        "*.world": "xml",
+        "*.xacro": "xml",
+        "deque": "cpp"
+    }
+}
