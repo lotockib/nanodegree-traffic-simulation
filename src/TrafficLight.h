@@ -11,7 +11,7 @@
 
 using namespace std::chrono_literals;
 
-enum TrafficLightPhase { green, red };
+enum class TrafficLightPhase { red, green };
 
 // forward declarations to avoid include cycle
 class Vehicle;
