@@ -11,6 +11,8 @@ T MessageQueue<T>::receive()
     // to wait for and receive new messages and pull them from the queue using move semantics.
     // The received object should then be returned by the receive function.
     std::unique_lock<std::mutex> uLock(_mtx);
+    // wait is only run if the queue is not empty.  This is to avoid spurious thread wakeups from causing this
+    // function to proceed when there is actually nothing in the queue
     _con_var.wait(uLock, [this] { return !_queue.empty(); }); // pass unique lock to condition variable
     T msg = std::move(_queue.back());
     _queue.pop_back();
@@ -79,6 +81,7 @@ void TrafficLight::cycleThroughPhases()
       {
         // generate random duration from 4000-6000
         limit = (std::chrono::duration<double, std::milli>) ( (std::rand()) % 2001 + 4000 );
+        // limit = (std::chrono::duration<double, std::milli>) 4000;
 
         // reset start time
         start = std::chrono::high_resolution_clock::now();
@@ -96,12 +99,11 @@ void TrafficLight::cycleThroughPhases()
 
         // reset timer
         reset_timer = true;
-
-        // Send update method
-        _messages.send(std::move(_currentPhase));
       }
 
-      // sleep and update timer
+      // sleep, update timer, and send latest phase
+      auto msg = _currentPhase;
+      _messages.send(std::move(msg));
       std::this_thread::sleep_for(1ms);
       elapsed = std::chrono::high_resolution_clock::now() - start;
     }

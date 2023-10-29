@@ -1,5 +1,5 @@
 {
-    "C_Cpp.default.compilerPath": "/usr/bin/gcc",
+    "C_Cpp.default.compilerPath": "/usr/bin/g++",
     "files.associations": {
         "*.aliases": "shellscript",
         "*.bashrc": "shellscript",
@@ -14,6 +14,7 @@
         "*.urdf": "xml",
         "*.world": "xml",
         "*.xacro": "xml",
-        "deque": "cpp"
+        "deque": "cpp",
+        "condition_variable": "cpp"
     }
 }
